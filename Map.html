@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <style> 
+      .box { 
+        width: 540px;
+        height: 720px;
+        background: url(../images/UK.png) no-repeat;
+        background-size: 100% 100%;}
+    </style>
+  </head>
+  <body>
+    <!-- 2_准备一个具有大小的盒子 -->
+    <div class="box"></div>
+
+    <!-- 1_引入echarts.js -->
+    <script src="js/echarts.min.js"></script>
+
+    <!-- 3_初始化 -->
+    <script>
+        // 初始化实例对象 echarts.init(dom容器)
+        var myChart = echarts.init(document.querySelector(".box"));
+  
+		var dataG = [// lat, long,
+    [-4,52,211494,348,6708,11, "Wales"],
+    [-4,51,221171,824,6238.3,21.2, "South West"],
+    [-1,51,540229,618,6238.3,21.2, "South East"],
+    [0.2,52,389024,1320,6238.3,21.2, "East of England"]
+];
+
+var dataM = [
+    
+  [0,51.5,719701,2025,8030,22.6,"London"],
+  [-1.6,53.5,394084,2500,7161.3,45.4, "Yorkshire"],
+  [-2.7,52,429924,1298,7245,21.9, "Midlands Wast"]
+  
+  
+
+];
+
+var dataH = [
+    
+  [0,51.5,719701,2025,8030,22.6,"London"],
+  [-3,54,607218,1320,8192,21.2, "Northwest"],
+  [-1,52.8,329117,1298,7245,21.9, "Midlands East"]
+];
+
+var schema = [
+    {name: 'lat', index: 0, text: 'lat'},
+    {name: 'long', index: 1, text: 'long'},
+    {name: 'Total cases', index: 2, text: 'Total cases'},
+    {name: 'Cases in 7 days', index: 3, text: 'Cases in 7 days'},
+    {name: 'Rate per 100,000 population', index: 4, text: 'Rate per 100,000 population'},
+    {name: 'NRate per 100,000 population', index: 5, text: 'Rate per 100,000 population in 7 days'},
+    {name: 'lat', index: 6, text: 'Nanme'},
+];
+
+
+var itemStyle = {
+    opacity: 0.8,
+    shadowBlur: 10,
+    shadowOffsetX: 0,
+    shadowOffsetY: 0,
+    shadowColor: 'rgba(0,0,0,0.3)'
+};
+
+option = {
+    color: [
+        'Green', 'Green', 'Green'
+    ],
+    legend: {
+        top: 10,
+        data: ['Good', 'Medium', 'High'],
+        icon: ["triangle","circle","circle"],
+        textStyle: {
+            fontSize: 16,
+            color:"Black"
+        }
+    },
+    grid: {
+        left: '10%',
+        right: 150,
+        top: '18%',
+        bottom: '10%'
+    },
+    tooltip: {
+         backgroundColor: ['grey'],
+        formatter: function (obj) {
+            var value = obj.value;
+            return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
+                + value[6] +"    Condition: "+  obj.seriesName
+              
+                + '</div>'
+                + schema[2].text + '：' + value[2] + '<br>'
+                + schema[3].text + '：' + value[3] + '<br>'
+                + schema[4].text + '：' + value[4] + '<br>'
+                + schema[5].text + '：' + value[5] + '<br>'
+               ;
+        }
+    },
+    xAxis: {
+        show: false,
+        type: 'value',
+        name: 'Long',
+        nameGap: 16,
+        nameTextStyle: {
+            fontSize: 16
+        },
+		min:-8,
+        max: 2.5,
+        splitLine: {
+            show: false
+        },
+    },
+    yAxis: {
+        show: false,
+        type: 'value',
+        name: 'Lat',
+        nameLocation: 'end',
+        nameGap: 20,
+        nameTextStyle: {
+            fontSize: 16
+        },
+        min:49.95,
+        max: 58,
+        splitLine: {
+            show: false
+        },
+        splitLine: {
+            show: false
+        }
+    },
+    visualMap: [
+        {
+            left: 'right',
+            top: '10%',
+            dimension: 2,
+            min: 0,
+            max: 1000000,
+            itemWidth: 30,
+            itemHeight: 120,
+            calculable: true,
+            precision: 0.1,
+            text: ['Radius：Total cases'],
+            textStyle: {
+              fontSize: 16,
+              color:"Black"
+          },
+            textGap: 30,
+            inRange: {
+                symbolSize: [10, 70]
+            },
+            outOfRange: {
+                symbolSize: [10, 70],
+                color: ['rgba(255,255,255,0.4)']
+            },
+            controller: {
+                inRange: {
+                    color: ['Green']
+                },
+                outOfRange: {
+                    color: ['#999']
+                }
+            }
+        },
+
+        {
+            left: 'right',
+            bottom: '5%',
+            dimension: 4,
+            min: 5000,
+            max: 9000,
+            itemHeight: 120,
+            precision: 'auto',
+            text: ['Per 100,000 population'],
+            textStyle: {
+              fontSize: 16,
+              color:"Black"
+          },
+            textGap: 30,
+            inRange: {
+                colorLightness: [1, 0]
+            },
+            outOfRange: {
+                color: ['rgba(255,255,255,0.4)']
+            },
+            controller: {
+                inRange: {
+                    color: ['Green']
+                },
+                outOfRange: {
+                    color: ['Black']
+                }
+            }
+        }
+    ],
+    series: [
+        {
+            name: 'Good',
+            type: 'scatter',
+            itemStyle: itemStyle,
+            data: dataG
+        },
+        {
+            name: 'Medium',
+            type: 'scatter',
+            itemStyle: itemStyle,
+            data: dataM
+        },
+        {
+            name: 'High',
+            type: 'scatter',
+            itemStyle: itemStyle,
+            data: dataH
+        }
+    ]
+};
+  myChart.setOption(option);
+    </script>
+  </body>
+</html>

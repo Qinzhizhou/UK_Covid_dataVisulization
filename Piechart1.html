@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <style> 
+      .box { 
+        width: 500px;
+        height: 300px;
+        background-color:white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 2_准备一个具有大小的盒子 -->
+    <div class="box"></div>
+
+    <!-- 1_引入echarts.js -->
+    <script src="js/echarts.min.js"></script>
+
+    <!-- 3_初始化 -->
+    <script>
+        // 初始化实例对象 echarts.init(dom容器)
+        var myChart = echarts.init(document.querySelector(".box"));
+
+      
+  var option = {
+    color: ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"],
+    tooltip: {
+      trigger: 'item',
+      formatter: '{a} <br/>{b}: {c} ({d}%)'
+    },
+    legend: {
+      // 垂直居中,默认水平居中
+      // orient: 'vertical',
+
+      bottom: 0,
+      left: 10,
+      // 小图标的宽度和高度
+      itemWidth: 10,
+      itemHeight: 10,
+      // 修改图例组件的文字为 12px
+      textStyle: {
+        color: "Black",
+        fontSize: "10"
+      }
+    },
+    series: [{
+      name: 'Deaths registered by place of occurrence',
+      type: 'pie',
+      // 设置饼形图在容器中的位置
+      center: ["50%", "42%"],
+      // 修改饼形图大小，第一个为内圆半径，第二个为外圆半径
+      radius: ['40%', '60%'],
+      avoidLabelOverlap: false,
+      // 图形上的文字
+      label: {
+        show: false,
+        position: 'center'
+      },
+      // 链接文字和图形的线
+      labelLine: {
+        show: false
+      },
+      data: [{
+        value: 96005,
+        name: 'Hosipital'
+      },
+      {
+        value: 32021,
+        name: 'Care Homes'
+      },
+      {
+        value: 7817,
+        name: 'Homes'
+      },
+      {
+        value: 2064,
+        name: 'Hospices'
+      },
+      {
+        value: 499,
+        name: 'Other Communal Establishment'
+      },
+      {
+        value: 505,
+        name: 'Elsewhere'
+      }
+    
+        
+      ]
+    }]
+  };
+
+  myChart.setOption(option);
+    </script>
+  </body>
+</html>

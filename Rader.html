@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <style> 
+      .box { 
+        width: 600px;
+        height: 500px;
+        background-color:white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 2_准备一个具有大小的盒子 -->
+    <div class="box"></div>
+
+    <!-- 1_引入echarts.js -->
+    <script src="js/echarts.min.js"></script>
+
+    <!-- 3_初始化 -->
+    <script>
+        // 初始化实例对象 echarts.init(dom容器)
+        var myChart = echarts.init(document.querySelector(".box"));
+
+      
+  var option = { 
+    legend: {
+        data: ['Normal condition','COVID condition'],
+       
+    },
+    radar: {
+        // shape: 'circle',
+        indicator: [
+            { name: 'Physical functioning', max: 100},
+            { name: 'Role-physcial', max: 100},
+            { name: 'Role-emotional', max: 100},
+            { name: 'Energy', max: 100},
+            { name: 'Emotional well-being', max: 100},
+            { name: 'Social functioning', max: 100},
+            { name: 'Pain', max: 100},
+            { name: 'General health', max: 100},
+           
+        ]
+    },
+    series: [{
+        name: 'Normal condition VS Covid-19',
+        type: 'radar',
+        data: [
+            {
+                value: [95, 100, 100, 70, 75, 55, 85, 75  ],
+                name: 'Normal condition'
+            },
+           
+          ]
+    },
+    {
+        name: 'Normal condition VS Covid-19',
+        type: 'radar',
+        data: [
+            {
+                value: [65, 22, 35, 45, 55, 45, 70, 65 ],
+                name: 'COVID condition'
+            },
+           
+          ]
+    }
+  
+  
+  
+  
+  ]
+};
+    
+  myChart.setOption(option);
+    </script>
+  </body>
+</html>

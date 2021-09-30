@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <style> 
+      .box { 
+        width: 600px;
+        height: 600px;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+   
+    <div class="box"></div>
+
+ 
+    <script src="js/echarts.min.js"></script>
+
+    
+    <script>
+       
+        var myChart = echarts.init(document.querySelector(".box"));
+        var yearData = [{
+      
+      data: [
+        [0, 12, 4567, 6201, 1570, 829, 761, 1295, 6914, 23254, 13430, 53285, 18607, 5455,4479]
+        
+      ]
+    },
+    
+  ];
+
+
+  var option = {
+    tooltip: {
+      trigger: 'axis',
+    },
+    legend: {
+      top: "0%",
+      textStyle: {
+        color: "black",
+        fontSize: "12"
+      }
+    },
+    grid: {
+      top: '30',
+      left: '10',
+      right: '30',
+      bottom: '10',
+      containLabel: true
+    },
+    xAxis: [{
+      type: 'category',
+      boundaryGap: false,
+      
+      axisLabel: {
+        textStyle: {
+          color: "black",
+          fontSize: 12
+        }
+      },
+    
+      axisLine: {
+        lineStyle: {
+          color: "black"
+        }
+      },
+      data: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr']
+    }],
+    yAxis: [{
+      type: 'value',
+      axisTick: {
+       
+        show: false
+      },
+      axisLine: {
+        lineStyle: {
+          color: "black"
+        }
+      },
+      axisLabel: {
+        textStyle: {
+          color: "black",
+          fontSize: 12
+        }
+      },
+     
+      splitLine: {
+        lineStyle: {
+          color: "rgba(255,255,255,.1)"
+        }
+      }
+    }],
+    series: [{
+        name: 'Death',
+        type: 'line',
+        smooth: true, 
+        lineStyle: {
+          color: "red",
+          width: 2
+        },
+    
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(
+            0,
+            0,
+            0,
+            1,
+            [{
+                offset: 0,
+                color: "rgba(1, 132, 213, 0.4)" 
+              },
+              {
+                offset: 0.8,
+                color: "rgba(1, 132, 213, 0.1)"
+              }
+            ],
+            false
+          ),
+          shadowColor: "rgba(0, 0, 0, 0.1)"
+        },
+        
+        symbol: 'circle',
+    
+        symbolSize: 5,
+        
+        showSymbol: false,
+        
+        itemStyle: {
+          color: "red",
+          borderColor: "rgba(221, 220, 107, .1)",
+          borderWidth: 12
+        },
+        data: [0,1, 769, 568, 135, 27, 11, 3, 67, 358, 399, 746, 891, 224, 28]
+      },
+    ]
+  };;
+        
+        myChart.setOption(option);       
+    </script>
+  </body>
+</html>

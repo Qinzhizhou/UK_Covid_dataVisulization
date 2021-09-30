@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <style> 
+      .box { 
+        width: 600px;
+        height: 600px;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="box"></div>
+
+    <script src="js/echarts.min.js"></script>
+
+
+    <script>
+        var myChart = echarts.init(document.querySelector(".box"));
+        var yearData = [{
+      
+      data: [
+        
+        [0, 12, 4567, 6201, 1570, 829, 761, 1295, 6914, 23254, 13430, 53285, 18607, 5455,4479]
+        
+      ]
+    },
+    
+  ];
+
+
+  var option = {
+    color: ['#00f2f1'],
+    tooltip: {
+      trigger: 'axis'
+    },
+ 
+    legend: {
+      left: "40%",
+      top: "10%",
+      
+      textStyle: {
+        color: '#4c9bfd'
+      },
+      right: '10%',
+    },
+    grid: {
+      top: "20%",
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true,
+      show: true, 
+      borderColor: '#012f4a' 
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 
+      'Jan', 'Feb', 'Mar', 'Apr'],
+  
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        color: "blcak" 
+      },
+      axisLine: {
+        show: false 
+      }
+    },
+    yAxis: {
+      type: 'value',
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        color: "black" 
+      },
+      axisLine: {
+        show: false 
+      },
+      splitLine: {
+        lineStyle: {
+          color: "#012f4a"
+        }
+      }
+    },
+    series: [{
+        type: 'line',
+        smooth: true, 
+        name: 'Newcases reported',
+        data: yearData[0].data[0]
+      }
+    ]
+  };
+        myChart.setOption(option);       
+    </script>
+  </body>
+</html>

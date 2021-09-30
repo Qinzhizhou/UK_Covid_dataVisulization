@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <style> 
+      .box { 
+        width: 600px;
+        height: 600px;
+        background-color:rgb(248, 245, 245);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 2_准备一个具有大小的盒子 -->
+    <div class="box"></div>
+
+    <!-- 1_引入echarts.js -->
+    <script src="js/echarts.min.js"></script>
+
+    <!-- 3_初始化 -->
+    <script>
+        // 初始化实例对象 echarts.init(dom容器)
+        var myChart = echarts.init(document.querySelector(".box"));
+
+        // 4_指定配置项option  和数据
+        var option;
+         // 1.实例化对象
+
+  var option = {
+    color: ['#2f89cf'],
+    // 提示框组件
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { // 坐标轴指示器，坐标轴触发有效
+        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+      }
+    },
+    // 修改图表位置大小
+    grid: {
+      left: '0%',
+      top: '10px',
+      right: '0%',
+      bottom: '4%',
+      containLabel: true
+    },
+    // x轴相关配置
+    xAxis: [{
+      type: 'category',
+      data: ["Yorkshire", "West Midlands", "South West", "South East", "North West", "Northeast","London ","East of England"],
+      axisTick: {
+        alignWithLabel: true
+      },
+      // 修改刻度标签，相关样式
+      axisLabel: {
+        color: "black",
+        fontSize: 6
+      },
+      // x轴样式不显示
+      axisLine: {
+        show: false
+      }
+    }],
+    // y轴相关配置
+    yAxis: [{
+      type: 'value',
+      // 修改刻度标签，相关样式
+      axisLabel: {
+        color: "black",
+        fontSize: 12
+      },
+      // y轴样式修改
+      axisLine: {
+        lineStyle: {
+          color: "black",
+          width: 2
+        }
+      },
+      // y轴分割线的颜色
+      splitLine: {
+        lineStyle: {
+          color: "black"
+        }
+      }
+    }],
+    // 系列列表配置
+    series: [{
+      name: 'Total number of cases',
+      type: 'bar',
+      barWidth: '35%',
+      // ajax传动态数据
+      data: [386051, 425821, 218737, 535187, 601370, 191349, 713212, 385017],
+      itemStyle: {
+        // 修改柱子圆角
+        barBorderRadius: 5
+      }
+    }]
+  };
+        
+        // 5_将配置项设置给echarts实例对象
+        myChart.setOption(option);       
+    </script>
+  </body>
+</html>
